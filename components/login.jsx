@@ -24,7 +24,7 @@ export   function LoginForm({ className, ...props }) {
     const router = useRouter()
     const handlesubmit =async (e)=>{
         e.preventDefault();
-        const res = await axios.post("http://localhost:3000/api/login",formdata)
+        const res = await axios.post("/api/login",formdata)
         
         console.log(res)
 

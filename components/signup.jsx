@@ -27,7 +27,7 @@ export function SignupForm({ ...props }) {
       alert("password did not match");
       return;
     }
-    const res = await axios.post("http://localhost:3000/api/signup", formdata);
+    const res = await axios.post("/api/signup", formdata);
     if(res.data.status == "success"){
         router.push("/")
     }
