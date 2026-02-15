@@ -1,5 +1,5 @@
 "use client"
-
+import { Button } from "@/components/ui/button"
 import {
   IconCreditCard,
   IconDotsVertical,
@@ -33,7 +33,9 @@ export function NavUser({
   user,
 }) {
   const { isMobile } = useSidebar()
-
+  const handlelogout= ()=>{
+    console.log("logout")
+  }
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -79,7 +81,7 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <IconLogout />
-              Log out
+              <Button onClick=(handleloqout)>Log out</Button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
