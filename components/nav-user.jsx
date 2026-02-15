@@ -1,6 +1,5 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { cookies } from 'next/headers';
 import { useRouter } from 'next/navigation'
 import {deleteCookie} from "@/lib/logout"
 import {
