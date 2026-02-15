@@ -1,5 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button"
+import { cookies } from 'next/headers';
+import { useRouter } from 'next/navigation'
 import {
   IconCreditCard,
   IconDotsVertical,
@@ -32,9 +34,13 @@ import {
 export function NavUser({
   user,
 }) {
+  const router = useRouter()
   const { isMobile } = useSidebar()
   const handlelogout= ()=>{
     console.log("logout")
+    cookies.delete("token")
+    router.push("/")
+    
   }
   return (
     <SidebarMenu>
