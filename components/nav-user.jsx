@@ -81,7 +81,7 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <IconLogout />
-              <Button onClick=(handleloqout)>Log out</Button>
+              <Button onClick={handleloqout}>Log out</Button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
