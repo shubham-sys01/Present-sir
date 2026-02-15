@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button"
 import { cookies } from 'next/headers';
 import { useRouter } from 'next/navigation'
+import {deleteCookie} from "@/lib/logout"
 import {
   IconCreditCard,
   IconDotsVertical,
@@ -36,9 +37,9 @@ export function NavUser({
 }) {
   const router = useRouter()
   const { isMobile } = useSidebar()
-  const handlelogout= ()=>{
+  const handlelogout= async ()=>{
     console.log("logout")
-    cookies.delete("token")
+    await deleteCookie("token")
     router.push("/")
     
   }
