@@ -154,6 +154,10 @@ const page = () => {
   };
   return (
     <SidebarPro title="TimeTable">
+      {Loading ? <><Button disabled size="sm">
+        <Spinner data-icon="inline-start" />
+        Loading...
+      </Button></> :
       <div className="p-1.5 ">
         {!addclass ? (
           <Button onClick={() => setAddclass(true) } className={"my-1.5"}>Edit Timetable</Button>
@@ -302,7 +306,7 @@ const page = () => {
             );
           })}
         </div>}
-      </div>
+      </div>}
     </SidebarPro>
   );
 };
