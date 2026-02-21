@@ -36,7 +36,7 @@ export function Timetable({ day }) {
     console.log(res);
     const data = await res.json();
     console.log(data);
-
+    setLoading(false);
     settimetable(data.data[0].classes);
   };
 
