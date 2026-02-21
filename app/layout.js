@@ -1,5 +1,6 @@
 import { LoginForm } from "@/components/login";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "@/Provider/themeprovider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,12 +26,14 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
 
-        {/* <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-          <div className="w-full max-w-sm">
-            <LoginForm />
-          </div>
-        </div> */}
-        {children}
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
       </body>
     </html>
   );

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
+import { ModeToggle } from "./themebtn"
 export function SiteHeader({value}) {
     
   return (
@@ -14,6 +15,7 @@ export function SiteHeader({value}) {
           className="mx-2 data-[orientation=vertical]:h-4"
         />
         <h1 className="text-base font-medium">{value}</h1>
+        <ModeToggle/>
       </div>
     </header>
   )
