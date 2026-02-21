@@ -55,7 +55,7 @@ const data = {
     },
     {
       title: "Subjects",
-      url: "#",
+      url: "/Subject",
       icon: IconFolder,
     },
     {

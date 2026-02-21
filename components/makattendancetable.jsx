@@ -10,6 +10,7 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export function Timetable({ day }) {
   const [timetable, settimetable] = useState([]);
@@ -41,7 +42,18 @@ export function Timetable({ day }) {
     fetchdata();
   }, [day]);
 
-  console.log(timetable);
+  const handlepresent = async (it)=>{
+    console.log(it)
+    const res = await axios.patch("api/subject",{subject : it.subject , code : it.code ,status : true} )
+    console.log(res)
+
+  }
+  const handleabsent = async (it)=>{
+    console.log(it)
+    const res = await axios.patch("api/subject",{subject : it.subject , code : it.code , status :false})
+    console.log(res)
+
+  }
   return <>
       {timetable.length == 0 ?<><div>no class marked</div></> : 
     <div className="flex w-full max-w-md flex-col gap-6">
@@ -49,14 +61,17 @@ export function Timetable({ day }) {
         return (
           <Item variant="outline" key={i}>
             <ItemContent>
-              <ItemTitle>{item.time}</ItemTitle>
+              <ItemTitle>{item.subject}</ItemTitle>
               <ItemDescription>
-                {item.subject}
+                {item.starttime} - {item.endtime}
               </ItemDescription>
             </ItemContent>
             <ItemActions>
-              <Button variant="outline" size="sm" onClick={()=>{console.log("present")}}>
-                {item.status == 'absent' ? "Absent" : "Present"}
+              <Button variant="outline" size="sm" onClick={()=>handlepresent(item)}>
+                Mark Present
+              </Button>
+              <Button variant="outline" size="sm" onClick={()=>handleabsent(item)}>
+                Absent
               </Button>
             </ItemActions>
           </Item>

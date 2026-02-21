@@ -47,7 +47,7 @@ export async function POST(req) {
             }
         ]
 
-        console.log(res)
+        console.log("user" ,res)
         const tt = await timetable.insertOne({ userid: res._id, timetable: timetabled })
         console.log(tt)
     } catch (error) {

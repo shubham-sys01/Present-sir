@@ -48,7 +48,7 @@ const page = () => {
     })
   }
   const handleconfirm = async ()=>{
-    const res = await axios.post("/api/attendance",subjects)
+    const res = await axios.post("/api/subject",subjects)
     if(res.status == 200){
       router.push("/Dashboard")
     }

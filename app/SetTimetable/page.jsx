@@ -9,6 +9,7 @@ import { Item, ItemContent } from "@/components/ui/item";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { ItemTitle, ItemDescription, ItemActions } from "@/components/ui/item";
+import { deleteCookie } from "@/lib/logout";
 import {
   Select,
   SelectContent,
@@ -49,8 +50,9 @@ const page = () => {
   }
 
   const fetchsubjects = async () => {
-    const res = await fetch("/api/attendance");
+    const res = await fetch("/api/subject");
     const data = await res.json();
+    console.log(data)
     setsubjects(data.data);
   };
   const router = useRouter();
@@ -59,9 +61,6 @@ const page = () => {
     const data = await fetch("/api/timetable");
     const res = await data.json();
     console.log(res);
-    if (data.status == 401) {
-      router.push("/");
-    }
     setTimetable(res.data.timetable);
   };
   useEffect(() => {
@@ -81,6 +80,7 @@ const page = () => {
                 starttime: convertTo12Hour(classelem.starttime),
                 endtime: convertTo12Hour(classelem.endtime),
                 subject: classelem.subject,
+                code : classelem.code
               },
             ],
           };
@@ -126,16 +126,21 @@ const page = () => {
     if (conf == false) {
       return;
     }
-    const res = await axios.post("/api/timetable/settimetable", timetable);
-    console.log(res);
+    try {
+      const res = await axios.post("/api/timetable/settimetable", timetable);
+    } catch (error) {
+      console.log(error)
+       await deleteCookie("token")
+    }
+    
     console.log(timetable);
     setAddclass(false);
   };
   return (
     <SidebarPro title="TimeTable">
-      <div className="p-1.5">
+      <div className="p-1.5 ">
         {!addclass ? (
-          <Button onClick={() => setAddclass(true)}>Edit Timetable</Button>
+          <Button onClick={() => setAddclass(true) } className={"my-1.5"}>Edit Timetable</Button>
         ) : (
           <Item className={"p-1.5 "}>
             <ItemContent className={"flex flex-col gap-1"}>
@@ -186,6 +191,30 @@ const page = () => {
                   </Select>
                 </Field>
                 <Field>
+                  <FieldLabel htmlFor="code">Subject Code</FieldLabel>
+                  <Select
+                    id="subject"
+                    onValueChange={(value) => {
+                      setclasselem({ ...classelem, code: value });
+                    }}
+                  >
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder="Subject" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {subjects.map((item) => {
+                          return (
+                            <SelectItem value={item.code}>
+                              {item.code}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </Field>
+                <Field>
                   <FieldLabel htmlFor="Start Time">Start Time</FieldLabel>
                   <Input
                     type="time"
@@ -217,13 +246,13 @@ const page = () => {
             </ItemContent>
           </Item>
         )}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           {timetable.map((day, i) => {
             return (
-              <Card className={"p-1"} key={i}>
-                <CardTitle className={"p-1"}>{day.day}</CardTitle>
-                <CardContent className={"gap-1.5"}>
-                  {day.classes.map((item) => {
+              <Card className={"p-2"} key={i}>
+                <CardTitle className={"p-2  rounded-lg w-fit "}>{day.day}</CardTitle>
+                <CardContent className={" flex flex-col gap-2"}>
+                  {day.classes.length == 0 ?  <><div>No Classes Marked</div></>: day.classes.map((item) => {
                     return (
                       <Item variant="outline" className={"p-2 "}>
                         <ItemContent>
