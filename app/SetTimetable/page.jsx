@@ -9,6 +9,7 @@ import { Item, ItemContent } from "@/components/ui/item";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { ItemTitle, ItemDescription, ItemActions } from "@/components/ui/item";
+import { Spinner } from "@/components/ui/spinner";
 import { deleteCookie } from "@/lib/logout";
 import {
   Select,
@@ -56,24 +57,28 @@ const page = () => {
   }
 
   const fetchsubjects = async () => {
+    setLoading(true)
     const res = await fetch("/api/subject");
     const data = await res.json();
     console.log(data)
     setsubjects(data.data);
+    setLoading(false)
   };
   const router = useRouter();
   const [timetable, setTimetable] = useState([]);
   const fetchdata = async () => {
+    setLoading(true)
     const data = await fetch("/api/timetable");
     const res = await data.json();
     console.log(res);
     setTimetable(res.data.timetable);
+    setLoading(false)
   };
   useEffect(() => {
-    setLoading(true)
+    
     fetchdata();
     fetchsubjects();
-    setLoading(false)
+    
   }, []);
   const handleadd = async (c) => {
      if(classelem.endtime == null || classelem.day == null || classelem.subject == null || classelem.starttime == null){
@@ -136,6 +141,7 @@ const page = () => {
       alert("fill all the details")
       return ;
     }
+    setLoading(true)
     const conf = confirm(
       "Your timetable will be modified and cannot be restored. Continue ? ",
     );
@@ -148,7 +154,7 @@ const page = () => {
       console.log(error)
        await deleteCookie("token")
     }
-    
+    setLoading(false)
     console.log(timetable);
     setAddclass(false);
   };
