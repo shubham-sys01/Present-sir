@@ -14,8 +14,10 @@ export function SiteHeader({value}) {
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">{value}</h1>
+        <div className="flex flex-row justify-between w-full items-center">
+          <h1 className="text-base font-medium">{value}</h1>
         <ModeToggle/>
+        </div>
       </div>
     </header>
   )
