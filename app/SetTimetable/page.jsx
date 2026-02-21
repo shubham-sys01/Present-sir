@@ -23,10 +23,10 @@ const page = () => {
   const [addclass, setAddclass] = useState(false);
   const [subjects, setsubjects] = useState([]);
   const [classelem, setclasselem] = useState({
-    day: "",
-    subject: "",
-    starttime: "",
-    endtime: "",
+    day: null,
+    subject: null,
+    starttime: null,
+    endtime: null,
   });
   const days = [
     "Monday",
@@ -37,6 +37,10 @@ const page = () => {
     "Saturday",
   ];
   function convertTo12Hour(time24) {
+    if(!time24){
+      alert("select time ")
+      return null;
+    }
     const [hours, minutes, seconds] = time24.split(":").map(Number);
 
     const period = hours >= 12 ? "PM" : "AM";
@@ -46,7 +50,7 @@ const page = () => {
 
     return `${hour12.toString().padStart(2, "0")}:${minutes
       .toString()
-      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")} ${period}`;
+      .padStart(2, "0")} ${period}`;
   }
 
   const fetchsubjects = async () => {
@@ -68,6 +72,10 @@ const page = () => {
     fetchsubjects();
   }, []);
   const handleadd = async (c) => {
+     if(classelem.endtime == null || classelem.day == null || classelem.subject == null || classelem.starttime == null){
+      alert("fill all the details")
+      return ;
+    }
     console.log(classelem);
     setTimetable((prev) => {
       return prev.map((item) => {
@@ -120,6 +128,10 @@ const page = () => {
     console.log(timetable);
   };
   const handlesubmit = async () => {
+    if(classelem.endtime == null || classelem.day == null || classelem.subject == null || classelem.starttime == null){
+      alert("fill all the details")
+      return ;
+    }
     const conf = confirm(
       "Your timetable will be modified and cannot be restored. Continue ? ",
     );
@@ -220,7 +232,7 @@ const page = () => {
                     type="time"
                     id="time-picker-optional"
                     step="1"
-                    defaultValue="00:00:00"
+                  
                     className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
                     onChange={(e) => {
                       setclasselem({ ...classelem, starttime: e.target.value });
@@ -233,7 +245,7 @@ const page = () => {
                     type="time"
                     id="time-picker-optional"
                     step="1"
-                    defaultValue="00:00:00"
+          
                     className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
                     onChange={(e) => {
                       setclasselem({ ...classelem, endtime: e.target.value });
