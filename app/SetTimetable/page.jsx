@@ -36,7 +36,9 @@ const page = () => {
     "Friday",
     "Saturday",
   ];
+  const [Loading, setLoading] = useState(false)
   function convertTo12Hour(time24) {
+    
     if(!time24){
       alert("select time ")
       return null;
@@ -68,8 +70,10 @@ const page = () => {
     setTimetable(res.data.timetable);
   };
   useEffect(() => {
+    setLoading(true)
     fetchdata();
     fetchsubjects();
+    setLoading(false)
   }, []);
   const handleadd = async (c) => {
      if(classelem.endtime == null || classelem.day == null || classelem.subject == null || classelem.starttime == null){
@@ -258,6 +262,10 @@ const page = () => {
             </ItemContent>
           </Item>
         )}
+        {Loading ? <><Button disabled size="sm">
+        <Spinner data-icon="inline-start" />
+        Loading...
+      </Button></> : 
         <div className="flex flex-col gap-2">
           {timetable.map((day, i) => {
             return (
@@ -293,7 +301,7 @@ const page = () => {
               </Card>
             );
           })}
-        </div>
+        </div>}
       </div>
     </SidebarPro>
   );

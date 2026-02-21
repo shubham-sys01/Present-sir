@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Timetable } from "@/components/makattendancetable";
 const page = () => {
+  const [loading, setLoading] = useState(false)
   const date = new Date();
   const day = date.toLocaleDateString("en-IN", {
     weekday: "long"
