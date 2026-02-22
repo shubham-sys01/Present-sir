@@ -49,7 +49,7 @@ const page = () => {
             <CardHeader>
               <CardDescription>Total Attendance</CardDescription>
               <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-                {Math.ceil((details?.attendedclass / details?.totalclass)*100)==NaN ? "--" : Math.ceil((details?.attendedclass / details?.totalclass)*100) }%
+                {Math.ceil((details?.attendedclass / details?.totalclass)*100)==NaN ? "--" : Math.ceil((details?.attendedclass / details?.totalclass)*100).toString() }%
               </CardTitle>
               <CardAction>
                 <Badge variant="outline">
@@ -93,7 +93,7 @@ const page = () => {
             <CardHeader>
               <CardDescription>Classes Missed</CardDescription>
               <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-                {details?.totalclass - details?.attendedclass}
+                {(details?.totalclass - details?.attendedclass).toString()}
               </CardTitle>
               <CardAction>
                 <Badge variant="outline">

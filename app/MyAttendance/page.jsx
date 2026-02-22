@@ -44,7 +44,7 @@ const page = () => {
                   <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
                     {Math.ceil(
                       (sub["attended classes"] / sub.totalclasses) * 100,
-                    )}
+                    ).toString()}
                     %
                   </CardTitle>
                   <CardAction>

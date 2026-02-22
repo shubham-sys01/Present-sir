@@ -158,9 +158,16 @@ const data = {
 
 export function AppSidebar({ ...props }) {
   const {getuser} = useContext(usercontext)
-  const user = getuser()
+  const [user, setUser] = useState()
+  useEffect(() => {
+    const user = getuser()
+    setUser(user)
+    console.log(getuser())
+  }, [])
+  
+  
   const router = useRouter()
-  console.log(getuser())
+  
   
   return (
     <Sidebar collapsible="offcanvas" {...props}>

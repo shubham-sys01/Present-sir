@@ -7,11 +7,11 @@ const Userprovider = ({ children }) => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const setuser = (data) => {
-    localStorage.setItem("user", JSON.stringify(data));
+    window?.localStorage.setItem("user", JSON.stringify(data));
   };
 
   const getuser = () => {
-    if (localStorage.getItem("user")) {
+    if (window?.localStorage.getItem("user")) {
       const data = JSON.parse(localStorage.getItem("user"));
       setUsername(data.username);
       setEmail(data.email);
