@@ -23,7 +23,7 @@ const page = () => {
     const response = await res.json();
     console.log(response);
     setdata(response.data);
-    setLoading(true);
+    setLoading(false);
   };
   useEffect(() => {
     fetchdata();
