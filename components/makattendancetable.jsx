@@ -31,13 +31,16 @@ export function Timetable({ day }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ day: day }),
+      body: JSON.stringify({ day: "Friday" }),
     });
     console.log(res);
     const data = await res.json();
     console.log(data);
     setLoading(false);
-    settimetable(data.data[0].classes);
+    if(data.status){
+      console.log(data.data[0].classes)
+      settimetable(data.data[0].classes);
+    }
   };
 
   useEffect(() => {
@@ -83,7 +86,7 @@ export function Timetable({ day }) {
             </>
           ) : (
             <div className="flex w-full max-w-md flex-col gap-6">
-              {timetable.length == 0 ? (
+              {timetable?.length == 0 ? (
                 <>
                   <div>Set your timetable</div>
                 </>

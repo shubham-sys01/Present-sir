@@ -1,10 +1,28 @@
+"use client";
+import { useState, useContext } from "react";
+import { usercontext } from "@/Provider/usercontext";
 import React from "react";
 import SidebarPro from "@/Provider/SidebarPro";
+import { IconTrendingDown, IconTrendingUp } from "@tabler/icons-react";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 const page = () => {
+  const { username, email } = useContext(usercontext);
   return (
-    <SidebarPro>
-      <div>ABHI BANA RAHA HU</div>
-      <div><img src="https://r2.community.samsung.com/t5/image/serverpage/image-id/3936467i48DF8444CA8DDC95/image-size/small?v=v2&px=200" alt="" /></div>
+    <SidebarPro title={"Analytics"}>
+      <div className="p-2.5"> 
+        <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+          {`Analytics -  ${username}`}
+        </h2>
+
+      </div>
     </SidebarPro>
   );
 };

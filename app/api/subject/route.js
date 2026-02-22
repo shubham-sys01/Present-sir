@@ -68,8 +68,8 @@ export async function DELETE(req) {
     if (!user) {
         return NextResponse.json({ message: "user not found" }, { status: 404 })
     }
-    const subjects = user.attendance;
-    const updatesubjects = subjects.filter((item) => {
+    const oldsubjects = user.attendance;
+    const updatesubjects = oldsubjects.filter((item) => {
         return item.subject != subject && item.code != code;
     })
     try {

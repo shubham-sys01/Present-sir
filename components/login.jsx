@@ -19,7 +19,10 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { usercontext } from "@/Provider/usercontext";
 export   function LoginForm({ className, ...props }) {
+  const {setuser } = useContext(usercontext)
     const [formdata, setFormdata] = useState({})
     const router = useRouter()
     const handlesubmit =async (e)=>{
@@ -32,9 +35,11 @@ export   function LoginForm({ className, ...props }) {
           alert(res.data.message)
           return ;
         }
+        
+        setuser({username : res.data.username , email :res.data.email})
         console.log(res.data.message)
         if(res.data.firstlogin){
-          console.log("redirect done")
+          console.log("redirect done");
           router.push("/setup")
         }
         else{

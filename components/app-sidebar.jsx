@@ -1,5 +1,8 @@
 "use client";
-
+import { useState , useContext } from "react";
+import { usercontext } from "@/Provider/usercontext";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import * as React from "react";
 import {
   IconCamera,
@@ -154,6 +157,11 @@ const data = {
 };
 
 export function AppSidebar({ ...props }) {
+  const {getuser} = useContext(usercontext)
+  const user = getuser()
+  const router = useRouter()
+  console.log(getuser())
+  
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -175,7 +183,7 @@ export function AppSidebar({ ...props }) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user}/>
+        <NavUser user={user}/>
       </SidebarFooter>
     </Sidebar>
   );

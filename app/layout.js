@@ -2,7 +2,7 @@ import { LoginForm } from "@/components/login";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/Provider/themeprovider";
 import "./globals.css";
-
+import Userprovider from "@/Provider/usercontext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,7 +32,10 @@ export default function RootLayout({ children }) {
             enableSystem
             disableTransitionOnChange
           >
+            <Userprovider>
             {children}
+
+            </Userprovider>
           </ThemeProvider>
       </body>
     </html>

@@ -27,7 +27,7 @@ export async function POST(req) {
     const token = await gentoken(userid)
     const firstlogin = finduser.firstlogin;
     await user.findOneAndUpdate({ email: email }, { firstlogin: false });
-    const response = NextResponse.json({ message: "Login success", firstlogin: firstlogin });
+    const response = NextResponse.json({ message: "Login success", firstlogin: firstlogin ,username : finduser.username , email : finduser.email});
     response.cookies.set("token", token, {
         httpOnly: true,
         secure: false,
