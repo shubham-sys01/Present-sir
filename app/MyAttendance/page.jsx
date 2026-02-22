@@ -36,9 +36,9 @@ const page = () => {
       </Card>
       {Loading ? (
         <>
-        <div className="flex flex-col justify-center items-center">
-          <Spinner className={"h-8"}/>
-        </div>
+        <div className="absolute top-[50%] left-[50%] bg-[#00000033] p-7 -translate-y-1/2  -translate-x-1/2  rounded-3xl ">
+        <Spinner/>
+      </div>
         </>
       ) : (
         <div className="p-2.5 flex flex-col gap-3">

@@ -21,18 +21,22 @@ import { redirect } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { usercontext } from "@/Provider/usercontext";
+import { Spinner } from "./ui/spinner";
 export   function LoginForm({ className, ...props }) {
+  const [Loading, setLoading] = useState(false);
   const {setuser } = useContext(usercontext)
     const [formdata, setFormdata] = useState({})
     const router = useRouter()
     const handlesubmit =async (e)=>{
         e.preventDefault();
+        setLoading(true)
         const res = await axios.post("/api/login",formdata)
         
         console.log(res)
 
         if(res.data.status == false){
           alert(res.data.message)
+          setLoading(false)
           return ;
         }
         
@@ -46,11 +50,16 @@ export   function LoginForm({ className, ...props }) {
           console.log("redirect done")
           router.push("/Dashboard")
         }
+        setLoading(false)
     }
     // if()
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+    <div className={cn("flex flex-col gap-6 ", className)} {...props}>
+      
+      <Card className="relative">
+        {Loading ? <div className="absolute top-[50%] left-[50%] bg-[#00000033] p-7 -translate-y-1/2  -translate-x-1/2  rounded-3xl ">
+        <Spinner/>
+      </div> : <></>}
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>
