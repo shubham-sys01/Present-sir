@@ -31,7 +31,7 @@ export function Timetable({ day }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ day: "Friday" }),
+      body: JSON.stringify({ day: day }),
     });
     console.log(res);
     const data = await res.json();
