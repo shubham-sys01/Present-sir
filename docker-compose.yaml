@@ -1,0 +1,8 @@
+version: '3.9'
+
+services:
+  present-sir:
+    image: present-sir
+    container_name: presentsircontainer
+    ports:
+      - "5000:3000"
